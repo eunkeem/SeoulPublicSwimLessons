@@ -4,15 +4,14 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20sp"
-    android:padding="30dp">
-
+    android:padding="30dp"
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +25,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="3"
-                android:text="센터명" />
+                android:text="CENTER" />
 
             <TextView
                 android:id="@+id/tv_centerName"
@@ -34,9 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="센터명"
-                />
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <View
@@ -57,7 +54,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="3"
-                android:text="요일" />
+                android:text="WEEK" />
 
             <TextView
                 android:id="@+id/tv_week"
@@ -65,9 +62,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="요일"
-                />
+                android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +76,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="3"
-                android:text="강습시간" />
+                android:text="TIME" />
 
             <TextView
                 android:id="@+id/tv_classTime"
@@ -89,9 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="강습시간"
-                />
+                android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,7 +98,7 @@
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_weight="3"
-                android:text="강습비" />
+                android:text="LESSON FEE" />
 
             <TextView
                 android:id="@+id/tv_fee"
@@ -113,9 +106,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="강습비"
-                />
+                android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

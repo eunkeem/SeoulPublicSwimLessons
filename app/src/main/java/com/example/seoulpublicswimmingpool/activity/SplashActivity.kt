@@ -15,6 +15,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         initView()
     }
+
+    /*Set the activity to maintain the splash using the handler*/
     private fun initView(){
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({

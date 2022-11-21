@@ -5,6 +5,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parceler
 import kotlinx.parcelize.Parcelize
 
+/*to store the data as Parcelize (to increase speed)*/
 @Parcelize
 class SwimLesson(
     val id: Int, var center: String?, var week: String?, var time: String?, val fee: String?

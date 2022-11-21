@@ -1,9 +1,6 @@
 package com.example.seoulpublicswimmingpool.seoulPublicSwimLessonData
 
-import com.google.gson.annotations.SerializedName
-
 data class Row(
-    @SerializedName("ADDRESS")
     val ADDRESS: String,
     val CAPACITY: String,
     val CENTER_NAME: String,

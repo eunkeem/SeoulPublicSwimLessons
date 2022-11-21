@@ -8,7 +8,7 @@ import android.util.Log
 
 class DBHelper(context: Context, dbName: String, version: Int) :
     SQLiteOpenHelper(context, dbName, null, version) {
-    /*테이블생성*/
+    /*create table*/
     override fun onCreate(db: SQLiteDatabase?) {
         val query = """
             CREATE TABLE seoulSwimLessonTBL(
@@ -22,7 +22,7 @@ class DBHelper(context: Context, dbName: String, version: Int) :
         db?.execSQL(query)
     }
 
-    /*버전이 변결될때 콜백 함수*/
+    /*Callback function when version changes*/
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val query = """
             DROP TABLE seoulSwimLessonTBL
@@ -31,7 +31,7 @@ class DBHelper(context: Context, dbName: String, version: Int) :
         this.onCreate(db)
     }
 
-    /*모든 데이터 불러오기*/
+    /*Load all data*/
     fun selectAll(): ArrayList<SwimLesson>? {
         var lessonList: ArrayList<SwimLesson>? = arrayListOf<SwimLesson>()
         var cursor: Cursor? = null
@@ -64,7 +64,7 @@ class DBHelper(context: Context, dbName: String, version: Int) :
         return lessonList
     }
 
-    /*데이터를 테이블에 넣기*/
+    /*put data into table*/
     fun insertData(swimLesson: SwimLesson): Boolean {
         var flag = false
         val query = """
@@ -84,7 +84,7 @@ class DBHelper(context: Context, dbName: String, version: Int) :
         return flag
     }
 
-    /*검색한 값이 포함된 칼럼의 데이터 불러오기*/
+    /*Load data of searched items*/
     fun searchCenter(query: String): MutableList<SwimLesson>? {
         var lessonList: MutableList<SwimLesson>? = mutableListOf<SwimLesson>()
         var cursor: Cursor? = null

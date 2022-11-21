@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*Apply list type data to recyclerView using adapter*/
     private fun setRecyclerView() {
         customAdapter = CustomAdapter(dataList)
         binding.recyclerView.apply {
@@ -50,15 +51,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*Receive public data using retrofit, insert into DB*/
     private fun swimmlessonData() {
-        // 1.retrofit 객체를 생성
+        // 1.create a retrofit object
         val retrofit = Retrofit.Builder().baseUrl(SeoulOpenApi.DOMAIN)
             .addConverterFactory(GsonConverterFactory.create()).build()
 
-        // 2.retrofit 객체에 interface를 전달
+        // 2.Pass interface to retrofit object
         val service = retrofit.create(SeoulOpenService::class.java)
 
-        // 3.인터페이스 함수를 오버라이딩 해서 구현
+        // 3.Implemented by overriding interface functions
         service.getSwimmingPools(SeoulOpenApi.API_KEY, SeoulOpenApi.LIMIT)
             .enqueue(object : Callback<SwimmingPool> {
                 @SuppressLint("NotifyDataSetChanged")
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
                     data?.let {
                         it.ListProgramByPublicSportsFacilitiesService.list_total_count
-                        Log.d("retrofit", "서울공공수영장 강습 내용 로드 성공")
+                        Log.d("retrofit", "contents loaded successfully")
                         val loadData = it.ListProgramByPublicSportsFacilitiesService.row
                         for (i in loadData.indices) {
                             val id = i + 1
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         Log.d("retrofit", "${dataList.size}")
 
-                        //DB에 데이터 입력
+                        //4. insert into DB
                         val dbHelper = DBHelper(this@MainActivity, DB_NAME, VERSION)
                         if (dataList.size != 0) {
                             for (data in 0 until dataList.size) {
@@ -90,23 +92,23 @@ class MainActivity : AppCompatActivity() {
                                 dbHelper.insertData(swimLesson)
                             }
                         } else {
-                            Log.d("seoulpublicswimmingpool", "MainActivity DB연결실패 ")
+                            Log.d("seoulpublicswimmingpool", "DB Connection Failed ")
                         }
                     } ?: let {
-                        Log.d("retrofit", "서울공공수영장 강습 데이터 없음")
+                        Log.d("retrofit", "No data")
                     }
                     customAdapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(call: Call<SwimmingPool>, t: Throwable) {
-                    Log.d("retrofit", "공공도서관 로딩 에러 ${t.printStackTrace()}")
-                    Toast.makeText(this@MainActivity, "서울공공수영장 강습 데이터 로딩 에러", Toast.LENGTH_SHORT)
+                    Log.d("retrofit", "loading error ${t.printStackTrace()}")
+                    Toast.makeText(this@MainActivity, "Seoul public swimming pool lesson data loading error", Toast.LENGTH_SHORT)
                         .show()
                 }
             })
     }
 
-    /*menuSearch*/
+    /*Register search menu in action bar*/
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_overflow, menu)
         val searchMenu = menu?.findItem(R.id.menuSearch)
@@ -116,7 +118,6 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
-
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(query: String?): Boolean {
                 val dbHelper = DBHelper(applicationContext, DB_NAME, VERSION)
@@ -134,5 +135,4 @@ class MainActivity : AppCompatActivity() {
         })
         return super.onCreateOptionsMenu(menu)
     }
-
 }
